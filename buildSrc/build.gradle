@@ -1,0 +1,17 @@
+group 'category'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile("org.spockframework:spock-core:1.0-groovy-2.4") {
+        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+    }
+}

@@ -1,0 +1,29 @@
+group 'category'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.codehaus.groovy:groovy-all:2.4.1'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+}
+
+tasks.withType(Test) {
+    CategoryParser cp = new CategoryParser(System.getProperty('categories'))
+
+    useJUnit {
+        includeCategories cp.includes()
+        excludeCategories cp.excludes()
+    }
+
+    testLogging {
+        setShowStandardStreams true
+    }
+}
